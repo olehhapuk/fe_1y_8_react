@@ -25,7 +25,7 @@ const productsData = [
     price: 12.5,
     imageUrl:
       'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__480.jpg',
-    available: true,
+    available: false,
   },
   {
     name: 'Burger',
@@ -48,6 +48,7 @@ function App() {
     <div>
       {productsData.map((product) => (
         <Product
+          key={product.name}
           name={product.name}
           price={product.price}
           imageUrl={product.imageUrl}
