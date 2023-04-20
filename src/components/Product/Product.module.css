@@ -1,0 +1,25 @@
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+  font-family: sans-serif;
+}
+
+.testText {
+  color: green;
+}
+
+.nameAvailable {
+  composes: name;
+  color: green;
+}
+
+.nameUnavailable {
+  composes: name;
+  color: red;
+}
+
+.price {
+  font-family: sans-serif;
+  font-weight: 700;
+}
