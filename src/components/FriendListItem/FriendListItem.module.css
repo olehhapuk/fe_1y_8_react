@@ -1,3 +1,8 @@
+.item {
+  display: flex;
+  align-items: center;
+}
+
 .status {
   width: 18px;
   height: 18px;
