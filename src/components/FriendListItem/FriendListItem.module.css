@@ -1,0 +1,16 @@
+.status {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.online {
+  composes: status;
+  background-color: #70d85b;
+}
+
+.offline {
+  composes: status;
+  background-color: palevioletred;
+}
