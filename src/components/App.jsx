@@ -1,14 +1,23 @@
-import FriendList from './FriendList/FriendList';
-import friends from './FriendList/friends.json';
-import TransactionHistory from './TransactionHistory/TransactionHistory';
-import transactions from './TransactionHistory/transactions.json';
+import Counter from './Counter';
 
 function App() {
+  function handleClick1(e) {
+    console.log(e.target);
+  }
+
+  function handleButtonClick(a = 'hello') {
+    console.log(a);
+  }
+
   return (
     <div>
-      {/* <Profile username={user.name} /> */}
-      <FriendList friends={friends} />
-      <TransactionHistory items={transactions} />
+      <Counter />
+      <hr />
+
+      <button onClick={handleClick1}>Click me with event</button>
+      <button onClick={() => handleButtonClick('abc')}>
+        Click me with params
+      </button>
     </div>
   );
 }
