@@ -1,4 +1,5 @@
 import Counter from './Counter';
+import Switch from './Switch';
 
 function App() {
   function handleClick1(e) {
@@ -11,7 +12,9 @@ function App() {
 
   return (
     <div>
-      <Counter />
+      <Switch>Content 1</Switch>
+      <hr />
+      <Counter initialValue={1} step={5} />
       <hr />
 
       <button onClick={handleClick1}>Click me with event</button>

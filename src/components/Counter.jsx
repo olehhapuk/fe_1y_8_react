@@ -1,17 +1,31 @@
 import { useState } from 'react';
 
-function Counter() {
-  const [counter, setCounter] = useState(5);
+import CounterActions from './CounterActions';
+
+function Counter({ initialValue, step = 1 }) {
+  const [counter, setCounter] = useState(initialValue);
 
   function handleIncrementClick() {
-    setCounter(counter + 1);
+    // for (let i = 0; i < 5; i++) {
+    //   setCounter((prevCounter) => prevCounter + 1);
+    // }
+
+    setCounter((prevCounter) => prevCounter + step);
+  }
+
+  function handleDecrementClick() {
+    setCounter((prevCounter) => prevCounter - step);
   }
 
   return (
     <div>
       <h1>Counter</h1>
       <p>{counter}</p>
-      <button onClick={handleIncrementClick}>Increment</button>
+      <CounterActions
+        counter={counter}
+        onIncrement={handleIncrementClick}
+        onDecrement={handleDecrementClick}
+      />
     </div>
   );
 }
