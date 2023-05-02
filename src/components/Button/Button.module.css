@@ -1,0 +1,15 @@
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #279af1;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  outline: none;
+  background-color: #3085f3;
+}

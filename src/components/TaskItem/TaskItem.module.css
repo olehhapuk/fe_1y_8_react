@@ -1,0 +1,27 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid #e6e1c5;
+}
+
+.text {
+  padding-right: 18px;
+  font-size: 18px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.actions > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
