@@ -1,14 +1,34 @@
+import { useState } from 'react';
+
 import styles from './TaskEditor.module.css';
 import Button from '../Button/Button';
 
-function TaskEditor() {
+function TaskEditor({ onCreate }) {
+  const [text, setText] = useState('');
+  const [error, setError] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const isTextEmpty = text === '';
+    setError(isTextEmpty);
+
+    if (isTextEmpty) {
+      return;
+    }
+
+    onCreate(text);
+  }
+
   return (
-    <form className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <textarea
-        className={styles.input}
+        className={error ? styles.error : styles.input}
         placeholder="Enter todo text"
-        required
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
+      {error && <p className={styles['form-error']}>Error</p>}
 
       <Button type="submit">Create</Button>
     </form>
