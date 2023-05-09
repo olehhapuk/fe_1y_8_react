@@ -3,15 +3,19 @@ import { nanoid } from 'nanoid';
 
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
+import Container from './Container/Container';
 
-// Spread operator example
-const arr1 = ['a', 'b', 'c'];
-const arr2 = ['john', ...arr1];
+const people = ['John', 'Marry', 'Dmytro'];
+// const newPeople = people.filter((person) => {
+//   if (person === 'John') {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// });
+const newPeople = people.filter((person) => person !== 'John');
 
-arr1.push('d');
-
-console.log('arr1', arr1);
-console.log('arr2', arr2);
+console.log(newPeople);
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -26,15 +30,17 @@ function App() {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   }
 
-  function removeTask() {}
+  function removeTask(id) {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  }
 
   return (
-    <div>
+    <Container>
       <h1>Todo App</h1>
 
       <TaskEditor onCreate={addTask} />
-      <TaskList tasks={tasks} />
-    </div>
+      {tasks.length !== 0 && <TaskList tasks={tasks} onDelete={removeTask} />}
+    </Container>
   );
 }
 

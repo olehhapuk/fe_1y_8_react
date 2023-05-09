@@ -5,19 +5,18 @@ import Button from '../Button/Button';
 
 function TaskEditor({ onCreate }) {
   const [text, setText] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const isTextEmpty = text === '';
-    setError(isTextEmpty);
-
     if (isTextEmpty) {
-      return;
+      setError('Будь ласка введіть текст');
+    } else {
+      setError('');
+      onCreate(text);
     }
-
-    onCreate(text);
   }
 
   return (
@@ -28,7 +27,7 @@ function TaskEditor({ onCreate }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      {error && <p className={styles['form-error']}>Error</p>}
+      {error && <p className={styles['form-error']}>{error}</p>}
 
       <Button type="submit">Create</Button>
     </form>
