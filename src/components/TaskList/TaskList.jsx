@@ -1,7 +1,8 @@
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './TaskList.module.css';
 
-function TaskList({ tasks, onDelete }) {
+// prop drilling
+function TaskList({ tasks, onDelete, onChange }) {
   return (
     <ul className={styles.list}>
       {tasks.map((task) => (
@@ -11,6 +12,7 @@ function TaskList({ tasks, onDelete }) {
           completed={task.completed}
           text={task.text}
           onDelete={onDelete}
+          onChange={onChange}
         />
       ))}
     </ul>

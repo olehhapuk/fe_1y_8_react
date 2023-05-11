@@ -16,6 +16,7 @@ function TaskEditor({ onCreate }) {
     } else {
       setError('');
       onCreate(text);
+      setText('');
     }
   }
 

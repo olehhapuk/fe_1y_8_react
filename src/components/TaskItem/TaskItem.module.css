@@ -25,3 +25,11 @@
 .completed {
   text-decoration: line-through;
 }
+
+.checkbox {
+  accent-color: #279af1;
+}
+
+.checkbox:checked + .text {
+  text-decoration: line-through;
+}
