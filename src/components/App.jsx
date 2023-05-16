@@ -4,21 +4,11 @@ import { nanoid } from 'nanoid';
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
-
-// const people = ['John', 'Marry', 'Dmytro'];
-// const newPeople = people.filter((person) => {
-//   if (person === 'John') {
-//     return false;
-//   } else {
-//     return true;
-//   }
-// });
-// const newPeople = people.filter((person) => person !== 'John');
-
-// console.log(newPeople);
+import Input from './Input/Input';
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [query, setQuery] = useState('');
 
   function addTask(text) {
     const newTask = {
@@ -52,13 +42,34 @@ function App() {
     setTasks(newArray);
   }
 
+  const filteredTasks = tasks.filter((task) => {
+    if (task.text.includes(query)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
   return (
     <Container>
       <h1>Todo App</h1>
 
       <TaskEditor onCreate={addTask} />
-      {tasks.length !== 0 && (
-        <TaskList tasks={tasks} onDelete={removeTask} onChange={updateTask} />
+
+      <br />
+
+      <Input
+        placeholder="Search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
+      {filteredTasks.length !== 0 && (
+        <TaskList
+          tasks={filteredTasks}
+          onDelete={removeTask}
+          onChange={updateTask}
+        />
       )}
     </Container>
   );

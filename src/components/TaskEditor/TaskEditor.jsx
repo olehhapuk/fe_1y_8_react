@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import styles from './TaskEditor.module.css';
 import Button from '../Button/Button';
+import Input from '../Input/Input';
 
 function TaskEditor({ onCreate }) {
   const [text, setText] = useState('');
@@ -22,13 +23,13 @@ function TaskEditor({ onCreate }) {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <textarea
-        className={error ? styles.error : styles.input}
+      <Input
         placeholder="Enter todo text"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        error={error}
+        isTextArea
       />
-      {error && <p className={styles['form-error']}>{error}</p>}
 
       <Button type="submit">Create</Button>
     </form>
