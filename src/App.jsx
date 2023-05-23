@@ -1,6 +1,39 @@
-import { Button, Typography, Paper, Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
+import { useState } from 'react';
+
+import FeedbackOptions from './components/FeedbackOptions';
+import Section from './components/Section';
+import Statistics from './components/Statistics';
+import Notification from './components/Notification';
 
 function App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  function incrementGood() {
+    setGood(good + 1);
+  }
+
+  function incrementNeutral() {
+    setNeutral(neutral + 1);
+  }
+
+  function incrementBad() {
+    setBad((prevBad) => prevBad + 1);
+  }
+
+  function countTotalFeedback() {
+    const sum = good + neutral + bad;
+    return sum;
+  }
+
+  function countPositiveFeedbackPercentage() {
+    const sum = countTotalFeedback();
+    const percentage = Math.round((good / sum) * 100);
+    return isNaN(percentage) ? 0 : percentage;
+  }
+
   return (
     <Paper
       sx={{
@@ -8,29 +41,27 @@ function App() {
       }}
     >
       <Stack direction="column" gap="18px">
-        <Typography variant="h4" component="h2">
-          Please leave feedback
-        </Typography>
-        <Stack direction="row" gap="5px">
-          <Button variant="contained" color="success">
-            Good
-          </Button>
-          <Button variant="contained" color="primary">
-            Neutral
-          </Button>
-          <Button variant="contained" color="error">
-            Bad
-          </Button>
-        </Stack>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            onGoodClick={incrementGood}
+            onNeutralClick={incrementNeutral}
+            onBadClick={incrementBad}
+          />
+        </Section>
 
-        <Typography variant="h4" component="h2">
-          Statistics
-        </Typography>
-        <Stack direction="column" gap="5px">
-          <Typography variant="body1">Good: 3</Typography>
-          <Typography variant="body1">Neutral: 3</Typography>
-          <Typography variant="body1">Bad: 3</Typography>
-        </Stack>
+        <Section title="Statistics">
+          {countTotalFeedback() === 0 ? (
+            <Notification message="No feedback given" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={countTotalFeedback()}
+              positivePercentage={countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
       </Stack>
     </Paper>
   );
