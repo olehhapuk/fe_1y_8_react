@@ -1,69 +1,30 @@
-import { Paper, Stack } from '@mui/material';
-import { useState } from 'react';
-
-import FeedbackOptions from './components/FeedbackOptions';
-import Section from './components/Section';
-import Statistics from './components/Statistics';
-import Notification from './components/Notification';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [counter, setCounter] = useState(0);
+  const [text, setText] = useState('');
 
-  function incrementGood() {
-    setGood(good + 1);
-  }
+  useEffect(() => {
+    console.log('first render');
+  }, []);
 
-  function incrementNeutral() {
-    setNeutral(neutral + 1);
-  }
+  useEffect(() => {
+    console.log('render');
+  });
 
-  function incrementBad() {
-    setBad((prevBad) => prevBad + 1);
-  }
+  useEffect(() => {
+    console.log('counter update', counter);
+  }, [counter]);
 
-  function countTotalFeedback() {
-    const sum = good + neutral + bad;
-    return sum;
-  }
-
-  function countPositiveFeedbackPercentage() {
-    const sum = countTotalFeedback();
-    const percentage = Math.round((good / sum) * 100);
-    return isNaN(percentage) ? 0 : percentage;
-  }
+  useEffect(() => {
+    console.log('text update', text);
+  }, [text]);
 
   return (
-    <Paper
-      sx={{
-        padding: '12px',
-      }}
-    >
-      <Stack direction="column" gap="18px">
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            onGoodClick={incrementGood}
-            onNeutralClick={incrementNeutral}
-            onBadClick={incrementBad}
-          />
-        </Section>
-
-        <Section title="Statistics">
-          {countTotalFeedback() === 0 ? (
-            <Notification message="No feedback given" />
-          ) : (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={countTotalFeedback()}
-              positivePercentage={countPositiveFeedbackPercentage()}
-            />
-          )}
-        </Section>
-      </Stack>
-    </Paper>
+    <div>
+      <button onClick={() => setCounter((prev) => prev + 1)}>{counter}</button>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+    </div>
   );
 }
 
