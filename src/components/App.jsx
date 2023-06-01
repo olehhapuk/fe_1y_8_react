@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
 import TaskList from './TaskList/TaskList';
@@ -6,11 +6,30 @@ import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
 import Input from './Input/Input';
 
+function initTasks() {
+  const tasks = localStorage.getItem('tasks');
+  if (tasks) {
+    return JSON.parse(tasks);
+  } else {
+    return [];
+  }
+}
+
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(initTasks);
   const [query, setQuery] = useState('');
 
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
   function addTask(text) {
+    const existingTask = tasks.find((task) => task.text === text); // Шукаємо чи існує завдання по text
+    if (existingTask) {
+      alert('Task already exists');
+      return;
+    }
+
     const newTask = {
       id: nanoid(),
       text,
