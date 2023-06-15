@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
+import axios from 'axios';
 
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
@@ -18,6 +19,12 @@ function initTasks() {
 function App() {
   const [tasks, setTasks] = useState(initTasks);
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/tasks').then((res) => {
+      setTasks(res.data);
+    });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
