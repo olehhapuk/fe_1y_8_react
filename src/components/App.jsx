@@ -90,13 +90,11 @@ function App() {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      {filteredTasks.length !== 0 && (
-        <TaskList
-          tasks={filteredTasks}
-          onDelete={removeTask}
-          onChange={updateTask}
-        />
-      )}
+      <TaskList
+        tasks={filteredTasks}
+        onDelete={removeTask}
+        onChange={updateTask}
+      />
     </Container>
   );
 }
