@@ -1,4 +1,5 @@
 import styles from './Input.module.css';
+import HeightAnim from '../HeightAnim';
 
 function Input({ error, value, onChange, placeholder, isTextArea }) {
   return (
@@ -19,7 +20,9 @@ function Input({ error, value, onChange, placeholder, isTextArea }) {
         />
       )}
 
-      {error && <p className={styles['form-error']}>{error}</p>}
+      <HeightAnim active={!!error}>
+        <p className={styles['form-error']}>{error}</p>
+      </HeightAnim>
     </div>
   );
 }
