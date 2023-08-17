@@ -6,6 +6,7 @@ import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
 import Input from './Input/Input';
+import { getTasks } from '../services/tasksService';
 
 function initTasks() {
   const tasks = localStorage.getItem('tasks');
@@ -21,9 +22,7 @@ function App() {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/tasks').then((res) => {
-      setTasks(res.data);
-    });
+    getTasks().then((data) => setTasks(data));
   }, []);
 
   useEffect(() => {
