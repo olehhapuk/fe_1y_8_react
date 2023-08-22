@@ -2,13 +2,18 @@
   "tasks": [
     {
       "text": "Test insomnia",
-      "completed": false,
+      "completed": true,
       "id": 2
     },
     {
       "text": "Test insomnia copy",
       "completed": false,
       "id": 3
+    },
+    {
+      "text": "task 1",
+      "completed": false,
+      "id": 4
     }
   ]
 }

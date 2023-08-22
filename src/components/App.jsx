@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import axios from 'axios';
 
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
 import Input from './Input/Input';
-import { getTasks } from '../services/tasksService';
+import {
+  getTasksService,
+  addTaskService,
+  updateTaskService,
+} from '../services/tasksService';
 
 function initTasks() {
   const tasks = localStorage.getItem('tasks');
@@ -22,7 +24,7 @@ function App() {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    getTasks().then((data) => setTasks(data));
+    getTasksService().then((data) => setTasks(data));
   }, []);
 
   useEffect(() => {
@@ -36,13 +38,10 @@ function App() {
       return;
     }
 
-    const newTask = {
-      id: nanoid(),
-      text,
-      completed: false,
-    };
-
-    setTasks((prevTasks) => [newTask, ...prevTasks]);
+    addTaskService(text).then((newTask) => {
+      console.log(newTask);
+      setTasks((prevTasks) => [newTask, ...prevTasks]);
+    });
   }
 
   function removeTask(id) {
@@ -50,21 +49,17 @@ function App() {
   }
 
   function updateTask(id, completed) {
-    const newArray = tasks.map((task) => {
-      if (task.id === id) {
-        const updatedTask = {
-          id: task.id,
-          text: task.text,
-          completed: completed,
-        };
+    updateTaskService(id, completed).then((updatedTask) => {
+      const newArray = tasks.map((task) => {
+        if (task.id === id) {
+          return updatedTask;
+        } else {
+          return task;
+        }
+      });
 
-        return updatedTask;
-      } else {
-        return task;
-      }
+      setTasks(newArray);
     });
-
-    setTasks(newArray);
   }
 
   const filteredTasks = tasks.filter((task) => {
