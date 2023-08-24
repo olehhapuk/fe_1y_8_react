@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { TailSpin } from 'react-loader-spinner';
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
@@ -8,6 +8,7 @@ import {
   getTasksService,
   addTaskService,
   updateTaskService,
+  removeTaskService,
 } from '../services/tasksService';
 
 function initTasks() {
@@ -22,6 +23,7 @@ function initTasks() {
 function App() {
   const [tasks, setTasks] = useState(initTasks);
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getTasksService().then((data) => setTasks(data));
@@ -39,13 +41,14 @@ function App() {
     }
 
     addTaskService(text).then((newTask) => {
-      console.log(newTask);
       setTasks((prevTasks) => [newTask, ...prevTasks]);
     });
   }
 
   function removeTask(id) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    removeTaskService(id).then(() => {
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    });
   }
 
   function updateTask(id, completed) {
@@ -73,17 +76,14 @@ function App() {
   return (
     <Container>
       <h1>Todo App</h1>
-
       <TaskEditor onCreate={addTask} />
-
       <br />
-
       <Input
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-
+      {isLoading && <TailSpin />}
       <TaskList
         tasks={filteredTasks}
         onDelete={removeTask}
