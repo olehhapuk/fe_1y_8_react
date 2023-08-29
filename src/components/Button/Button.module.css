@@ -13,3 +13,7 @@
   outline: none;
   background-color: #3085f3;
 }
+
+.btn:disabled {
+  opacity: 0.3;
+}

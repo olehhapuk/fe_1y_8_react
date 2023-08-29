@@ -4,7 +4,7 @@ import styles from './TaskEditor.module.css';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 
-function TaskEditor({ onCreate }) {
+function TaskEditor({ onCreate, isLoading }) {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
@@ -31,7 +31,9 @@ function TaskEditor({ onCreate }) {
         isTextArea
       />
 
-      <Button type="submit">Create</Button>
+      <Button type="submit" disabled={isLoading}>
+        Create
+      </Button>
     </form>
   );
 }

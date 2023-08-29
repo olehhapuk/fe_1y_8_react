@@ -30,4 +30,5 @@
   display: block;
   margin-top: 3px;
   color: #ff521b;
+  user-select: none;
 }

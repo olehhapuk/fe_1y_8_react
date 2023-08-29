@@ -24,9 +24,17 @@ function App() {
   const [tasks, setTasks] = useState(initTasks);
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [creationIsLoading, setCreationIsLoading] = useState(false);
 
   useEffect(() => {
-    getTasksService().then((data) => setTasks(data));
+    setIsLoading(true);
+    getTasksService()
+      .then((data) => {
+        setTasks(data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -40,29 +48,44 @@ function App() {
       return;
     }
 
-    addTaskService(text).then((newTask) => {
-      setTasks((prevTasks) => [newTask, ...prevTasks]);
-    });
+    setCreationIsLoading(true);
+    addTaskService(text)
+      .then((newTask) => {
+        setTasks((prevTasks) => [newTask, ...prevTasks]);
+      })
+      .finally(() => {
+        setCreationIsLoading(false);
+      });
   }
 
   function removeTask(id) {
-    removeTaskService(id).then(() => {
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-    });
+    setIsLoading(true);
+    removeTaskService(id)
+      .then(() => {
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function updateTask(id, completed) {
-    updateTaskService(id, completed).then((updatedTask) => {
-      const newArray = tasks.map((task) => {
-        if (task.id === id) {
-          return updatedTask;
-        } else {
-          return task;
-        }
-      });
+    setIsLoading(true);
+    updateTaskService(id, completed)
+      .then((updatedTask) => {
+        const newArray = tasks.map((task) => {
+          if (task.id === id) {
+            return updatedTask;
+          } else {
+            return task;
+          }
+        });
 
-      setTasks(newArray);
-    });
+        setTasks(newArray);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   const filteredTasks = tasks.filter((task) => {
@@ -76,7 +99,7 @@ function App() {
   return (
     <Container>
       <h1>Todo App</h1>
-      <TaskEditor onCreate={addTask} />
+      <TaskEditor onCreate={addTask} isLoading={creationIsLoading} />
       <br />
       <Input
         placeholder="Search"

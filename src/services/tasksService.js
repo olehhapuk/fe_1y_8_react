@@ -6,7 +6,14 @@ import axios from 'axios';
 // }
 
 export function getTasksService() {
-  return axios.get('/tasks').then((res) => res.data);
+  return axios
+    .get('/tasks', {
+      params: {
+        _sort: 'id',
+        _order: 'desc',
+      },
+    })
+    .then((res) => res.data);
 }
 
 export function addTaskService(text) {
