@@ -3,19 +3,28 @@ import { useState, useEffect } from 'react';
 
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
-import Loader from './components/Loader';
 import Modal from './components/Modal';
+import Button from './components/Button';
+
+// Math.ceil(totalCount / perPage) -> totalPages
 
 function App() {
   const [images, setImages] = useState([]);
   const [activeImage, setActiveImage] = useState(null);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalImages, setTotalImages] = useState(0);
 
   useEffect(() => {
+    if (query === '') {
+      return;
+    }
+
     axios
       .get('https://pixabay.com/api/', {
         params: {
-          q: 'cats',
-          page: 1,
+          q: query,
+          page,
           per_page: 12,
           image_type: 'photo',
           orientation: 'horizontal',
@@ -23,9 +32,10 @@ function App() {
         },
       })
       .then((res) => {
-        setImages(res.data.hits);
+        setImages((prevImages) => [...prevImages, ...res.data.hits]);
+        setTotalImages(res.data.totalHits);
       });
-  }, []);
+  }, [query, page]);
 
   function openModal(image) {
     setActiveImage(image);
@@ -35,12 +45,28 @@ function App() {
     setActiveImage(null);
   }
 
-  return (
-    <div className="App">
-      {activeImage && <Modal onClose={closeModal} />}
+  function handleSearch(newQuery) {
+    setQuery(newQuery);
+    setImages([]);
+    setPage(1);
+  }
 
-      <Searchbar />
-      <ImageGallery images={images} onOpen={openModal} />
+  function loadMore() {
+    setPage((prevPage) => prevPage + 1);
+  }
+
+  return (
+    <div>
+      <div className="App">
+        {activeImage && <Modal onClose={closeModal} />}
+
+        <Searchbar onSubmit={handleSearch} />
+        <ImageGallery images={images} onOpen={openModal} />
+      </div>
+
+      {images.length < totalImages && (
+        <Button onClick={loadMore}>Load More</Button>
+      )}
     </div>
   );
 }
