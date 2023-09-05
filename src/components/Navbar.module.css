@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 30px;
+  background-color: #333333;
+}
+
+.link {
+  font-size: 18px;
+}
+
+.active {
+  composes: link;
+  text-decoration: underline;
+}
