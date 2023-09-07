@@ -1,0 +1,8 @@
+.link {
+  font-size: 18px;
+}
+
+.active {
+  composes: link;
+  text-decoration: underline;
+}
