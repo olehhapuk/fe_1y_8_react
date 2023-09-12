@@ -7,6 +7,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import ShowsPage from './pages/ShowsPage';
 import ShowDetailsPage from './pages/ShowDetailsPage';
 import ShowReviewsPage from './pages/ShowReviewsPage';
+import ShowCastPage from './pages/ShowCastPage';
+import ShowEpisodesPage from './pages/ShowEpisodesPage';
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/shows" element={<ShowsPage />} />
         <Route path="/shows/:showId" element={<ShowDetailsPage />}>
-          <Route path="reviews" element={<ShowReviewsPage />} />
+          <Route index element={<ShowReviewsPage />} />
+          <Route path="cast" element={<ShowCastPage />} />
+          <Route path="episodes" element={<ShowEpisodesPage />} />
         </Route>
       </Route>
 

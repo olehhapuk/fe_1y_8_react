@@ -7,7 +7,11 @@ function ShowDetailsPage() {
     <div>
       <p>ShowDetailsPage #{showId}</p>
 
-      <Link to="reviews">Reviews</Link>
+      <Link to={`/shows/${showId}`}>Reviews</Link>
+      <br />
+      <Link to="cast">Cast</Link>
+      <br />
+      <Link to="episodes">Episodes</Link>
 
       <Outlet />
     </div>
