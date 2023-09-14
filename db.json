@@ -1,0 +1,116 @@
+{
+  "shows": [
+    {
+      "id": 1,
+      "title": "ONE PIECE",
+      "year": "2023",
+      "genres": ["Екшн і Пригоди", "Науково фантастичний"],
+      "rating": 82,
+      "tagline": "Пірати наближаються",
+      "description": "Кіноадаптація популярної манґи. Молодий пірат у солом’яному капелюсі Монкі Ді Луффі разом зі своєю різномасною командою вирушає в епічну подорож на пошуки скарбів.",
+      "link": "https://www.themoviedb.org/tv/111110-one-piece",
+      "trailer": "https://www.youtube.com/embed/xwSsdsiIUnk?si=ApIjrygEVzUdlbMd"
+    },
+    {
+      "id": 2,
+      "title": "Магічна битва",
+      "year": "2020",
+      "genres": ["Мультфільм", "Екшн і Пригоди", "Науково фантастичний"],
+      "rating": 86,
+      "tagline": "A boy fights... for \"the right death.\"",
+      "description": "Ітадорі Юджі — хлопець з надзвичайною фізичною силою, хоча живе абсолютно звичайним життям у середній школі. Одного разу, щоб врятувати друзів від нападу Прокляття, він з’їдає палець Дволикого, беручи Прокляття на власну душу. Відтоді він ділиться тілом з Дволиким. Під керівництвом наймогутнішого з магів Ґоджьо Сатору, Ітадорі вступає до Токійської школи темних мистецтв — організації, яка бореться з прокляттями… і таким чином починається героїчна історія про хлопця, який сам став Прокляттям, щоб протистояти Прокляттям.",
+      "link": "https://www.themoviedb.org/tv/95479",
+      "trailer": "https://www.youtube.com/embed/PKHQuQF1S8k?si=D3wvlHiFoBvrM8oM"
+    },
+    {
+      "id": 3,
+      "title": "Перехоплений рейс",
+      "year": "2023",
+      "genres": ["Драма"],
+      "rating": 81,
+      "tagline": "Let them think they're in control.",
+      "description": "Рейс КА29 вирушає з Дубая до Лондона, а тривалість польоту становить сім годин. Коли рейс захоплюють невідомі, досвідчений перемовник Сем Нельсон вирішує скористатися своїми професійними навичками, щоб врятувати пасажирів. Та чи буде успішною ця спроба втрутитися у ситуацію?",
+      "link": "https://www.themoviedb.org/tv/198102-hijack",
+      "trailer": "https://www.youtube.com/embed/WxwKzsklvJo?si=1t_LeuMqWg73JuXh"
+    }
+  ],
+  "cast": [
+    {
+      "id": 1,
+      "name": "Iñaki Godoy",
+      "bio": "Iñaki Godoy Jasso (born August 25, 2003) is a Mexican actor who is known for his role as Juan Ruiz in The Imperfects (2022) and Monkey D. Luffy in Netflix's live adaptation of One Piece (2023).",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/cjgF30gIyrHMzEk2dvilmRanDAL.jpg",
+      "showId": 1
+    },
+    {
+      "id": 2,
+      "name": "Mackenyu",
+      "bio": "Mackenyu Arata or Mackenyu Maeda is a Japanese-American actor born in Tokyo and raised in Los Angeles, California. He is the son of Japanese actor, producer, director, and martial artist, Sonny Chiba.",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/kIrLJmJCGc2fRAkVnBJXwAL7gAM.jpg",
+      "showId": 1
+    },
+    {
+      "id": 3,
+      "name": "Emily Rudd",
+      "bio": "Емілі Еллен Радд — американська актриса. У 2018 році з’явилася в серіалі-антології від Amazon «The Romanoffs» та серіалі «Електричні сни Філіпа К. Діка». У 2021 році вона з’явилася у фільмах «Вулиця страху. Частина друга: 1978» та «Вулиця страху. Частина третя: 1666» у ролях Сінді Берман та Ебігейл. Того ж року вона отримала роль у «Мисливцях». У 2021 році вона знялася в романтичній комедійній науково-фантастичній стрічці «Місячний прорив». Також у листопаді 2021 року Радд було обрано на роль Намі в серіалі Netflix, заснованому на манзі One Piece.",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/y23GTdDPcryBVtSWjY9q2O9nzwV.jpg",
+      "showId": 1
+    },
+    {
+      "id": 4,
+      "name": "Jacob Gibson",
+      "bio": "Jacob Romero Gibson is a Jamaican-American actor known for his role as Usopp in the upcoming live-action Netflix series, One Piece (2023). Gibson was born in Kingston, Jamaica and raised between Denver, CO and Los Angeles, CA.",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/foaSZvcg70p2gxiJxqtGo3YqWIC.jpg",
+      "showId": 1
+    },
+    {
+      "id": 5,
+      "name": "Junya Enoki",
+      "bio": null,
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/vBnNL3Jqy0zkS3ZgsXZmvDM9Dfz.jpg",
+      "showId": 2
+    },
+    {
+      "id": 6,
+      "name": "Yuma Uchida",
+      "bio": "Yuma Uchida is a Japanese voice actor. His older sister Maaya Uchida is also a voice actress.",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/k5yOai4JnkjpTVzSwIFzXxQ2LBP.jpg",
+      "showId": 2
+    },
+    {
+      "id": 7,
+      "name": "Asami Seto",
+      "bio": "Asami Seto is a Japanese voice actress affiliated with Sigma Seven. She made her debut in the television anime Hourou Musuko.",
+      "avatar": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/iKKCPgKrNd4pJ0iBOC1SBZy2Y4Y.jpg",
+      "showId": 2
+    }
+  ],
+  "episodes": [
+    {
+      "id": 1,
+      "title": "Episode 1",
+      "showId": 1
+    },
+    {
+      "id": 2,
+      "title": "Episode 2",
+      "showId": 1
+    },
+    {
+      "id": 3,
+      "title": "Episode 1",
+      "showId": 2
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "author": {
+        "id": 1,
+        "name": "John Doe"
+      },
+      "text": "Very good show!",
+      "showId": 1
+    }
+  ]
+}
