@@ -1,3 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+const apiKey = 'API_KEY';
+
+axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+axios.defaults.header.authorization = `Bearer ${apiKey}`;
