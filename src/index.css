@@ -65,3 +65,8 @@ textarea:focus {
   outline: none;
   border-color: #646cff;
 }
+
+.selected a {
+  text-decoration: underline;
+  color: green;
+}

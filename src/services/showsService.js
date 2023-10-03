@@ -6,10 +6,17 @@ export function searchShowsService(query, page) {
       params: {
         title_like: query,
         _page: page,
-        _limit: 8,
+        _limit: 2,
       },
     })
-    .then((res) => res.data);
+    .then((res) => {
+      const showsCount = +res.headers['x-total-count'];
+      return {
+        totalCount: showsCount,
+        totalPages: Math.ceil(showsCount / 2),
+        results: res.data,
+      };
+    });
 }
 
 export function getShowDetails(showId) {
