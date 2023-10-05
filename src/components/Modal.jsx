@@ -1,8 +1,21 @@
-function Modal({ onClose }) {
-  function overlayClick(e) {
-    console.log(e.target);
-    console.log(e.currentTarget);
+import { useEffect } from 'react';
 
+function Modal({ onClose, image }) {
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.code === 'Escape') {
+        onClose();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
+  function overlayClick(e) {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -11,10 +24,7 @@ function Modal({ onClose }) {
   return (
     <div className="Overlay" onClick={overlayClick}>
       <div className="Modal">
-        <img
-          src="https://pixabay.com/get/g5ddb4094586a62c446657d99b873232a83093008091dc00dc6835720e7b845a9b7471390b948684c56495fc8b46a81cc_640.jpg"
-          alt=""
-        />
+        <img src={image.largeImageURL} alt={image.tags} />
       </div>
     </div>
   );
