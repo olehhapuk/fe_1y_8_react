@@ -12,8 +12,15 @@ function App() {
   const [activeImage, setActiveImage] = useState(null);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (query === '') {
+      return;
+    }
+
+    setIsLoading(true);
+
     axios
       .get('https://pixabay.com/api/', {
         params: {
@@ -26,10 +33,19 @@ function App() {
         },
       })
       .then((res) => {
-        // Зробити так щоб нові зображення з нової сторінки довантажувались а не замінювали старі зображень
-        setImages(res.data.hits);
+        setImages((prevImages) => [...prevImages, ...res.data.hits]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [query, page]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [images]);
 
   function openModal(image) {
     setActiveImage(image);
@@ -42,6 +58,7 @@ function App() {
   function handleSearch(newQuery) {
     setQuery(newQuery);
     setPage(1);
+    setImages([]);
   }
 
   function loadMore() {
@@ -50,12 +67,16 @@ function App() {
 
   return (
     <div className="App">
-      {/* Відобразити Loader коли завантажуються дані з API */}
       {activeImage && <Modal onClose={closeModal} image={activeImage} />}
 
       <Searchbar onSearch={handleSearch} />
       <ImageGallery images={images} onOpen={openModal} />
-      <Button onClick={loadMore}>Load more</Button>
+
+      <div style={{ margin: '0 auto' }}>
+        {isLoading && <Loader />}
+
+        <Button onClick={loadMore}>Load more</Button>
+      </div>
     </div>
   );
 }
