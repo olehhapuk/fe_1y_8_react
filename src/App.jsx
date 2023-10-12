@@ -13,7 +13,7 @@ function App() {
   const [contacts, setContacts] = useState([]);
 
   function createContact(name, number) {
-    // Зробити запит на апі для створення контакту, передати об'єкт { name, number }
+    // Зробити запит на апі(використати готовий сервіс) для створення контакту, передати об'єкт { name, number }
     // Обробити відповідь апі, додавши новий контакт у стейт contacts
     // Перевірити наявність контакту в React DevTools
     console.log({ name, number });
