@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactForm from './components/ContactForm';
 import ContactsList from './components/ContactsList';
 import Searchbar from './components/Searchbar';
@@ -13,10 +13,30 @@ function App() {
   const [contacts, setContacts] = useState([]);
 
   function createContact(name, number) {
-    // Зробити запит на апі(використати готовий сервіс) для створення контакту, передати об'єкт { name, number }
-    // Обробити відповідь апі, додавши новий контакт у стейт contacts
-    // Перевірити наявність контакту в React DevTools
-    console.log({ name, number });
+    createContactService({
+      name,
+      number,
+    }).then((newContact) => {
+      setContacts((prev) => [...prev, newContact]);
+    });
+  }
+
+  useEffect(() => {
+    getAllContactsService().then((data) => {
+      setContacts(data);
+    });
+  }, []);
+
+  // Передати у проп onDelete компонента ContactsList
+  // Додати кнопку для видалення кнопку при кліці на яку запуститься ця функція через проп onDelete
+  function deleteContact(contactId) {
+    deleteContactService(contactId).then(() => {
+      setContacts((prev) =>
+        prev.filter((contact) => {
+          return contact.id !== contactId;
+        })
+      );
+    });
   }
 
   return (
@@ -27,7 +47,7 @@ function App() {
 
       <h2>Contacts</h2>
       <Searchbar />
-      <ContactsList />
+      <ContactsList contacts={contacts} />
     </div>
   );
 }
