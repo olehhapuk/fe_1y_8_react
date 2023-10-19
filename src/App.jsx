@@ -9,8 +9,10 @@ import {
 } from './services/contactsService';
 // import * as contactsServices from './services/contactsService';
 
+// Синхронізувати стан contacts з localStorage по прикладу зі списку завдань
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [query, setQuery] = useState('');
 
   function createContact(name, number) {
     createContactService({
@@ -27,9 +29,8 @@ function App() {
     });
   }, []);
 
-  // Передати у проп onDelete компонента ContactsList
-  // Додати кнопку для видалення кнопку при кліці на яку запуститься ця функція через проп onDelete
   function deleteContact(contactId) {
+    console.log({ contactId });
     deleteContactService(contactId).then(() => {
       setContacts((prev) =>
         prev.filter((contact) => {
@@ -39,6 +40,10 @@ function App() {
     });
   }
 
+  const filteredContacts = contacts.filter((contact) => {
+    return contact.name.toLowerCase().includes(query.toLowerCase());
+  });
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -46,8 +51,10 @@ function App() {
       <br />
 
       <h2>Contacts</h2>
-      <Searchbar />
-      <ContactsList contacts={contacts} />
+
+      <Searchbar query={query} setQuery={setQuery} />
+
+      <ContactsList contacts={filteredContacts} onDelete={deleteContact} />
     </div>
   );
 }
