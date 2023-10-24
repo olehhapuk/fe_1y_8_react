@@ -1,9 +1,17 @@
-import { useParams, Link, Outlet } from 'react-router-dom';
+import {
+  useParams,
+  Link,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getShowDetails } from '../services/showsService';
 
 function ShowDetailsPage() {
   const { showId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [show, setShow] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,8 +24,19 @@ function ShowDetailsPage() {
       .finally(() => setIsLoading(false));
   }, [showId]);
 
+  // Redirect with timeout
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigate('/');
+  //   }, 3000);
+  // }, [navigate]);
+
   return (
     <div>
+      <button type="button" onClick={() => navigate(-1)}>
+        {'<-'} Go Back
+      </button>
+      {location.pathname.endsWith('cast') && <p>Cast is active</p>}
       {isLoading && <p>Loading...</p>}
       {show && (
         <div>

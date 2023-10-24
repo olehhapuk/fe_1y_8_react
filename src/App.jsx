@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import SharedLayout from './layouts/SharedLayout';
 import HomePage from './pages/HomePage';
@@ -24,7 +24,8 @@ function App() {
         </Route>
       </Route>
 
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to="/404" />} />
+      <Route path="/404" element={<NotFoundPage />} />
     </Routes>
   );
 }
