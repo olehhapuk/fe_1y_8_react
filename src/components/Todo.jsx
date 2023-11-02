@@ -1,31 +1,25 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { CircularProgress } from '@chakra-ui/react';
+import { useApi } from '../hooks/useApi';
+import { getTodoDetailsService } from '../services/todosServices';
 
 function Todo() {
-  const [todo, setTodo] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  // data: todo - витягуємо значення властивості data у змінну todo
+  const {
+    data: todo,
+    loading,
+    error,
+    fetchData,
+  } = useApi(null, getTodoDetailsService);
 
   useEffect(() => {
-    setLoading(true);
-
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((res) => {
-        setTodo(res.data);
-      })
-      .catch((error) => {
-        // setError(error.response.data.message);
-        setError(error.message);
-      })
-      .finally(() => setLoading(false));
+    fetchData(4);
   }, []);
 
   return (
     <div>
       {loading && <CircularProgress />}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error.message}</p>}
 
       {todo && (
         <>
