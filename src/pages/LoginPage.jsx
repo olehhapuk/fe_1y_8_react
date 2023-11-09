@@ -1,13 +1,15 @@
 import { Container, Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
+import { useAuth } from '../hooks/useAuth';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   function handleLogin(values) {
-    console.log(values);
-
+    setUser(values);
+    ``;
     navigate('/profile');
   }
 
