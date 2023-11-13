@@ -1,16 +1,17 @@
 import { Container, Heading } from '@chakra-ui/react';
-import { useContext } from 'react';
 import PostsList from '../components/PostsList';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 function HomePage() {
-  const value = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
     <Container maxWidth="container.xl" py={5}>
-      <p>Context value: {JSON.stringify(value)}</p>
-      <Heading marginBottom={9}>Please login to view posts</Heading>
-      <PostsList />
+      {user ? (
+        <PostsList />
+      ) : (
+        <Heading marginBottom={9}>Please login to view posts</Heading>
+      )}
     </Container>
   );
 }

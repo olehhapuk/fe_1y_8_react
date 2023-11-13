@@ -3,20 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import App from './components/App';
-import { AuthContext } from './context/AuthContext';
+import { AuthProvider } from './providers/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ChakraProvider>
-        <AuthContext.Provider
-          value={{
-            username: 'user1',
-            password: 'pass123456789test',
-          }}
-        >
+        <AuthProvider>
           <App />
-        </AuthContext.Provider>
+        </AuthProvider>
       </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>

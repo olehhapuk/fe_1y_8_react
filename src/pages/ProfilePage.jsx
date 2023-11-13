@@ -1,9 +1,12 @@
 import { Container, Heading } from '@chakra-ui/react';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 function ProfilePage() {
-  const user = useContext(AuthContext);
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Heading>Please login</Heading>;
+  }
 
   return (
     <Container maxWidth="container.xl" py={5}>
