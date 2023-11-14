@@ -18,13 +18,17 @@ function Navbar() {
               <Link to="/">Home</Link>
             </Tab>
             {/* Відображати це посилання тільки якщо користувач авторизований */}
-            <Tab>
-              <Link to="/profile">Profile</Link>
-            </Tab>
+            {user && (
+              <Tab>
+                <Link to="/profile">Profile</Link>
+              </Tab>
+            )}
             {/* Відображати це посилання тільки якщо користувач неавторизований */}
-            <Tab>
-              <Link to="/login">Login</Link>
-            </Tab>
+            {!user && (
+              <Tab>
+                <Link to="/login">Login</Link>
+              </Tab>
+            )}
           </TabList>
         </Tabs>
 
