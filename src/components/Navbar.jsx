@@ -1,42 +1,37 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button, Container, Stack, Tab, TabList, Tabs } from '@chakra-ui/react';
-import { useAuth } from '../hooks/useAuth';
+
+const getActiveTabIndex = (pathname) =>
+  ['/', '/profile', '/login'].indexOf(pathname);
 
 function Navbar() {
-  const { user, setUser } = useAuth();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   function logout() {
-    setUser(null);
     navigate('/');
   }
 
   return (
     <Container maxWidth="container.xl" py={3} borderBottomWidth={1}>
       <Stack direction="row" justifyContent="space-between">
-        <Tabs variant="soft-rounded">
+        <Tabs variant="soft-rounded" index={getActiveTabIndex(pathname)}>
           <TabList>
-            <Tab>
-              <Link to="/">Home</Link>
+            <Tab as={Link} to="/">
+              Home
             </Tab>
-            {user && (
-              <Tab>
-                <Link to="/profile">Profile</Link>
-              </Tab>
-            )}
-            {!user && (
-              <Tab>
-                <Link to="/login">Login</Link>
-              </Tab>
-            )}
+            <Tab as={Link} to="/profile">
+              Profile
+            </Tab>
+            <Tab as={Link} to="/login">
+              Login
+            </Tab>
           </TabList>
         </Tabs>
 
-        {user && (
-          <Button colorScheme="red" onClick={logout}>
-            Logout
-          </Button>
-        )}
+        <Button colorScheme="red" onClick={logout}>
+          Logout
+        </Button>
       </Stack>
     </Container>
   );
