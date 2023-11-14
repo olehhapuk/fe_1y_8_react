@@ -1,9 +1,13 @@
 import { Container, Heading } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import LoginForm from '../components/LoginForm';
+import { AUTH_LOGIN } from '../redux/auth/auth.actions';
 
 function LoginPage() {
+  const dispatch = useDispatch();
+
   function handleLogin(values) {
-    console.log(values);
+    dispatch(AUTH_LOGIN(values));
   }
 
   return (
