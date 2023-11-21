@@ -7,7 +7,7 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   function handleLogin(values) {
-    dispatch(login());
+    dispatch(login(values));
   }
 
   return (

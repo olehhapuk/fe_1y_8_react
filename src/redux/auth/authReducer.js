@@ -8,7 +8,14 @@ export const authReducer = createReducer(
   },
   (builder) => {
     builder.addCase(login, (state, action) => {
-      state.username = 'updateduser1';
+      // ✅ Можна перезаписувати властивості стейту
+      // state.username = action.payload.username;
+      // state.password = action.payload.password;
+
+      // ❌ Не можна перезаписувати state
+      // state = action.payload;
+
+      return action.payload;
     });
   }
 );
