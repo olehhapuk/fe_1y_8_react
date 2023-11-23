@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './TaskList.module.css';
 
-// prop drilling
 function TaskList({ tasks, onDelete, onChange }) {
   return (
     <AnimatePresence>
