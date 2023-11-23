@@ -1,5 +1,8 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button, Container, Stack, Tab, TabList, Tabs } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout as logoutAction } from '../redux/auth/authActions';
+import { selectUser } from '../redux/auth/authSelectors';
 
 const getActiveTabIndex = (pathname) =>
   ['/', '/profile', '/login'].indexOf(pathname);
@@ -7,9 +10,12 @@ const getActiveTabIndex = (pathname) =>
 function Navbar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   function logout() {
     navigate('/');
+    dispatch(logoutAction());
   }
 
   return (
@@ -29,9 +35,11 @@ function Navbar() {
           </TabList>
         </Tabs>
 
-        <Button colorScheme="red" onClick={logout}>
-          Logout
-        </Button>
+        {user && (
+          <Button colorScheme="red" onClick={logout}>
+            Logout
+          </Button>
+        )}
       </Stack>
     </Container>
   );
