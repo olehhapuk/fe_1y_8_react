@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
 import Input from './Input/Input';
+import { addTaskAction, removeTaskAction } from '../redux/tasks/tasksActions';
+import { selectTasks } from '../redux/tasks/tasksSelectors';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
   const [query, setQuery] = useState('');
+  const tasks = useSelector(selectTasks);
+
+  const dispatch = useDispatch();
 
   function addTask(text) {
     const existingTask = tasks.find((task) => task.text === text);
@@ -22,11 +27,11 @@ function App() {
       completed: false,
     };
 
-    setTasks((prevTasks) => [newTask, ...prevTasks]);
+    dispatch(addTaskAction(newTask));
   }
 
   function removeTask(id) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    dispatch(removeTaskAction(id));
   }
 
   function updateTask(id, completed) {
