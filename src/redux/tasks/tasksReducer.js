@@ -1,11 +1,12 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import {
   addTaskAction,
   removeTaskAction,
   updateTaskAction,
+  setQueryAction,
 } from './tasksActions';
 
-export const tasksReducer = createReducer([], (builder) => {
+const tasksReducer = createReducer([], (builder) => {
   builder
     .addCase(addTaskAction, (state, action) => {
       state.unshift(action.payload);
@@ -31,4 +32,13 @@ export const tasksReducer = createReducer([], (builder) => {
         return task;
       });
     });
+});
+
+const queryReducer = createReducer('', (builder) => {
+  builder.addCase(setQueryAction, (_, action) => action.payload);
+});
+
+export default combineReducers({
+  tasks: tasksReducer,
+  query: queryReducer,
 });
