@@ -5,7 +5,11 @@ import TaskList from './TaskList/TaskList';
 import TaskEditor from './TaskEditor/TaskEditor';
 import Container from './Container/Container';
 import Input from './Input/Input';
-import { addTaskAction, removeTaskAction } from '../redux/tasks/tasksActions';
+import {
+  addTaskAction,
+  removeTaskAction,
+  updateTaskAction,
+} from '../redux/tasks/tasksActions';
 import { selectTasks } from '../redux/tasks/tasksSelectors';
 
 function App() {
@@ -35,18 +39,7 @@ function App() {
   }
 
   function updateTask(id, completed) {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            completed,
-          };
-        }
-
-        return task;
-      })
-    );
+    dispatch(updateTaskAction({ id, completed }));
   }
 
   const filteredTasks = tasks.filter((task) => task.text.includes(query));
