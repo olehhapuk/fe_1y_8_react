@@ -6,7 +6,7 @@ import {
   setQueryAction,
 } from './tasksActions';
 
-const tasksReducer = createReducer([], (builder) => {
+const itemsReducer = createReducer([], (builder) => {
   builder
     .addCase(addTaskAction, (state, action) => {
       state.unshift(action.payload);
@@ -39,6 +39,6 @@ const queryReducer = createReducer('', (builder) => {
 });
 
 export default combineReducers({
-  tasks: tasksReducer,
+  items: itemsReducer,
   query: queryReducer,
 });

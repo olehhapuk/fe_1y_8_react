@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskList from './TaskList/TaskList';
@@ -9,12 +8,18 @@ import {
   addTaskAction,
   removeTaskAction,
   updateTaskAction,
+  setQueryAction,
 } from '../redux/tasks/tasksActions';
-import { selectTasks } from '../redux/tasks/tasksSelectors';
+import {
+  selectTasks,
+  selectQuery,
+  selectFilteredTasks,
+} from '../redux/tasks/tasksSelectors';
 
 function App() {
-  const [query, setQuery] = useState('');
+  const query = useSelector(selectQuery);
   const tasks = useSelector(selectTasks);
+  const filteredTasks = useSelector(selectFilteredTasks);
 
   const dispatch = useDispatch();
 
@@ -42,8 +47,6 @@ function App() {
     dispatch(updateTaskAction({ id, completed }));
   }
 
-  const filteredTasks = tasks.filter((task) => task.text.includes(query));
-
   return (
     <Container>
       <h1>Todo App</h1>
@@ -52,7 +55,7 @@ function App() {
       <Input
         placeholder="Search"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => dispatch(setQueryAction(e.target.value))}
       />
       <TaskList
         tasks={filteredTasks}
