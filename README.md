@@ -25,7 +25,7 @@
 Приклад налаштування axios в `src/config/axios.js`, підставляємо свій API ключ.
 У цій роботі будуть використовуватися наступні ендпоінти:
 
-- [/trending/get-trending](https://developers.themoviedb.org/3/trending/get-trending)
+- [/trending/get-trending](https://developer.themoviedb.org/reference/trending-movies)
   список найпопулярніших фільмів на сьогодні для створення колекції на головній
   сторінці.
 - [/movies/get-movie-details](https://developers.themoviedb.org/3/movies/get-movie-details)
