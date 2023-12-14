@@ -17,11 +17,14 @@ function HomePage() {
   return (
     <div>
       {isLoading && <ColorRing visible />}
-      {movies.map((movie) => (
-        <Link key={movie.id} to={`/movies/${movie.id}`}>
-          {movie.title}
-        </Link>
-      ))}
+
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
