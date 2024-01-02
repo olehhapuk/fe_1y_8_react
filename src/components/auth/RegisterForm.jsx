@@ -10,6 +10,9 @@ import {
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../../redux/auth/authActions';
+import { registerService } from '../../services/authServices';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -21,6 +24,8 @@ const validationSchema = yup.object().shape({
 });
 
 function RegisterForm() {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -28,7 +33,9 @@ function RegisterForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      registerService(values).then((data) => {
+        dispatch(loginAction(data));
+      });
     },
   });
 
