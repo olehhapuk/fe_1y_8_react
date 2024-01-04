@@ -6,6 +6,8 @@ import {
   FormErrorMessage,
   Input,
   Wrap,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -13,6 +15,7 @@ import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../../redux/auth/authActions';
 import { registerService } from '../../services/authServices';
+import { useState } from 'react';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -26,6 +29,9 @@ const validationSchema = yup.object().shape({
 function RegisterForm() {
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -33,9 +39,15 @@ function RegisterForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      registerService(values).then((data) => {
-        dispatch(loginAction(data));
-      });
+      setIsLoading(true);
+      setError(null);
+
+      registerService(values)
+        .then((data) => {
+          dispatch(loginAction(data));
+        })
+        .catch((err) => setError(err.response.data.message))
+        .finally(() => setIsLoading(false));
     },
   });
 
@@ -63,8 +75,15 @@ function RegisterForm() {
         <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
       </FormControl>
 
+      {error && (
+        <Alert status="error">
+          <AlertIcon />
+          {error}
+        </Alert>
+      )}
+
       <Wrap>
-        <Button colorScheme="blue" type="submit">
+        <Button colorScheme="blue" type="submit" isLoading={isLoading}>
           Register
         </Button>
         <Button as={Link} to="/login" variant="ghost">
