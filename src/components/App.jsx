@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
+
 import AuthLayout from '../layouts/AuthLayout';
 import RootLayout from '../layouts/RootLayout';
 
@@ -16,7 +18,14 @@ function App() {
       </Route>
 
       <Route element={<RootLayout />}>
-        <Route path="/feed" element={<FeedPage />} />
+        <Route
+          path="/feed"
+          element={
+            <PrivateRoute>
+              <FeedPage />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   );

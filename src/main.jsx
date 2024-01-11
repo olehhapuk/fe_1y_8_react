@@ -10,7 +10,15 @@ import App from './components/App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider
+      toastOptions={{
+        defaultOptions: {
+          isClosable: true,
+          position: 'top-right',
+          variant: 'left-accent',
+        },
+      }}
+    >
       <BrowserRouter>
         <Provider store={store}>
           <PersistGate persistor={persistor} loading={null}>

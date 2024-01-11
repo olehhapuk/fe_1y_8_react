@@ -8,8 +8,9 @@ import {
   Wrap,
   Alert,
   AlertIcon,
+  useToast,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -28,6 +29,8 @@ const validationSchema = yup.object().shape({
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -45,6 +48,11 @@ function LoginForm() {
       loginService(values)
         .then((data) => {
           dispatch(loginAction(data));
+          navigate('/feed');
+          toast({
+            title: 'Login successful!',
+            status: 'success',
+          });
         })
         .catch((err) => setError(err.response.data.message))
         .finally(() => setIsLoading(false));
