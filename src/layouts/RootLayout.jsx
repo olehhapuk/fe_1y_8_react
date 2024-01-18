@@ -20,7 +20,7 @@ function RootLayout() {
           <Navigation />
         </Box>
 
-        <Box flexGrow={1}>
+        <Box flexGrow={1} p="16px">
           <Outlet />
         </Box>
 

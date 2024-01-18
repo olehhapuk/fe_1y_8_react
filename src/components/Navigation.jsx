@@ -9,9 +9,16 @@ import {
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { RxExit } from 'react-icons/rx';
 import NavigationLink from './NavigationLink';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../redux/auth/authActions';
 
 function Navigation() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(logoutAction());
+  }
 
   return (
     <>
@@ -29,6 +36,7 @@ function Navigation() {
             aria-label="Logout"
             colorScheme="red"
             variant="ghost"
+            onClick={logout}
           />
         </ButtonGroup>
       </Flex>

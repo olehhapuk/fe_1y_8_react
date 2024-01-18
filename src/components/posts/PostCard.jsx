@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 
 function PostCard({ title, excerpt, author }) {
   return (
-    <Card maxW="md">
+    <Card>
       <CardHeader pb={0}>
         <Flex spacing="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -41,7 +41,7 @@ function PostCard({ title, excerpt, author }) {
         <Heading mb="8px" size="lg">
           {title}
         </Heading>
-        <Text>{excerpt}</Text>
+        <Text>{excerpt.slice(0, 180)}...</Text>
       </CardBody>
       <Image
         objectFit="cover"

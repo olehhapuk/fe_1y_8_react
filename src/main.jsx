@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         defaultOptions: {
           isClosable: true,
           position: 'top-right',
-          variant: 'left-accent',
         },
       }}
     >
