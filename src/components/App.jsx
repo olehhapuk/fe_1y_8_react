@@ -1,6 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 
 import PrivateRoute from './PrivateRoute';
+import { verifyService } from '../services/authServices';
+import { loginAction, logoutAction } from '../redux/auth/authActions';
+import { selectUser } from '../redux/auth/authSelectors';
 
 import AuthLayout from '../layouts/AuthLayout';
 import RootLayout from '../layouts/RootLayout';
@@ -10,6 +15,26 @@ import RegisterPage from '../pages/auth/RegisterPage';
 import FeedPage from '../pages/posts/FeedPage';
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (!user || !isFirstRender.current) {
+      return;
+    }
+
+    verifyService()
+      .then((data) => {
+        dispatch(loginAction(data));
+      })
+      .catch(() => {
+        dispatch(logoutAction());
+      });
+
+    isFirstRender.current = false;
+  }, [dispatch, user]);
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/feed" />} />

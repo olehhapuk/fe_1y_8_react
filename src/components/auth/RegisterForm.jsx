@@ -8,6 +8,7 @@ import {
   Wrap,
   Alert,
   AlertIcon,
+  ButtonGroup,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -24,6 +25,8 @@ const validationSchema = yup.object().shape({
     .max(50, 'Username cannot be longer than 50')
     .required('Username is required'),
   password: yup.string().min(8).max(255).required('Password is required'),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
 });
 
 function RegisterForm() {
@@ -36,6 +39,8 @@ function RegisterForm() {
     initialValues: {
       username: '',
       password: '',
+      firstName: '',
+      lastName: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -74,6 +79,32 @@ function RegisterForm() {
         />
         <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
       </FormControl>
+
+      <ButtonGroup>
+        <FormControl
+          isRequired
+          isInvalid={!!formik.errors.firstName && formik.touched.firstName}
+        >
+          <FormLabel>First Name</FormLabel>
+          <Input
+            placeholder="First Name"
+            {...formik.getFieldProps('firstName')}
+          />
+          <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
+        </FormControl>
+
+        <FormControl
+          isRequired
+          isInvalid={!!formik.errors.lastName && formik.touched.lastName}
+        >
+          <FormLabel>Last Name</FormLabel>
+          <Input
+            placeholder="Last Name"
+            {...formik.getFieldProps('lastName')}
+          />
+          <FormErrorMessage>{formik.errors.lastName}</FormErrorMessage>
+        </FormControl>
+      </ButtonGroup>
 
       {error && (
         <Alert status="error">
