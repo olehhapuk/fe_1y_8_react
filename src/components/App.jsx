@@ -13,6 +13,7 @@ import RootLayout from '../layouts/RootLayout';
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import FeedPage from '../pages/posts/FeedPage';
+import CreatePostPage from '../pages/posts/CreatePostPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,14 @@ function App() {
           element={
             <PrivateRoute>
               <FeedPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <PrivateRoute>
+              <CreatePostPage />
             </PrivateRoute>
           }
         />

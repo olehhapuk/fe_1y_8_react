@@ -44,6 +44,7 @@ function Navigation() {
       <Stack gap="4px">
         <NavigationLink to="/feed">Feed</NavigationLink>
         <NavigationLink to="/trending">Trending</NavigationLink>
+        <NavigationLink to="/create-post">+ Create Post</NavigationLink>
       </Stack>
     </>
   );

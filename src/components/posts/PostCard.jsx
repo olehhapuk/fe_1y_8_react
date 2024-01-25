@@ -41,7 +41,7 @@ function PostCard({ title, excerpt, author }) {
         <Heading mb="8px" size="lg">
           {title}
         </Heading>
-        <Text>{excerpt.slice(0, 180)}...</Text>
+        <Text>{excerpt}</Text>
       </CardBody>
       <Image
         objectFit="cover"

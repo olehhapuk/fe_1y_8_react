@@ -1,10 +1,6 @@
 import {
   Stack,
   Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
   Wrap,
   Alert,
   AlertIcon,
@@ -17,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { loginAction } from '../../redux/auth/authActions';
 import { loginService } from '../../services/authServices';
 import { useState } from 'react';
+import InputField from '../InputField';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -61,27 +58,21 @@ function LoginForm() {
 
   return (
     <Stack as="form" onSubmit={formik.handleSubmit}>
-      <FormControl
-        isRequired
-        isInvalid={!!formik.errors.username && formik.touched.username}
-      >
-        <FormLabel>Username</FormLabel>
-        <Input placeholder="Username" {...formik.getFieldProps('username')} />
-        <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
-      </FormControl>
-
-      <FormControl
-        isRequired
-        isInvalid={!!formik.errors.password && formik.touched.password}
-      >
-        <FormLabel>Password</FormLabel>
-        <Input
-          placeholder="Password"
-          type="password"
-          {...formik.getFieldProps('password')}
-        />
-        <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
-      </FormControl>
+      <InputField
+        label="Username"
+        placeholder="Username"
+        required
+        meta={formik.getFieldMeta('username')}
+        {...formik.getFieldProps('username')}
+      />
+      <InputField
+        label="Password"
+        placeholder="Password"
+        required
+        meta={formik.getFieldMeta('password')}
+        {...formik.getFieldProps('password')}
+        type="password"
+      />
 
       {error && (
         <Alert status="error">

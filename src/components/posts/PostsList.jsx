@@ -9,7 +9,7 @@ function PostsList({ posts }) {
         <PostCard
           key={post.id}
           title={post.title}
-          excerpt={post.body}
+          excerpt={post.excerpt}
           author={post.author}
         />
       ))}
