@@ -11,6 +11,7 @@ function PostsList({ posts }) {
           title={post.title}
           excerpt={post.excerpt}
           author={post.author}
+          image={post.image}
         />
       ))}
     </Stack>

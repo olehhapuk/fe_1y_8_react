@@ -5,3 +5,7 @@ export function getAllPostsService(params) {
     params,
   });
 }
+
+export function createPostService(data) {
+  return axios.post('/posts', data);
+}

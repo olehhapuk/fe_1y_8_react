@@ -16,7 +16,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BiLike, BiShare } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 
-function PostCard({ title, excerpt, author }) {
+function PostCard({ title, excerpt, author, image }) {
   return (
     <Card>
       <CardHeader pb={0}>
@@ -43,11 +43,7 @@ function PostCard({ title, excerpt, author }) {
         </Heading>
         <Text>{excerpt}</Text>
       </CardBody>
-      <Image
-        objectFit="cover"
-        src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Chakra UI"
-      />
+      {image && <Image objectFit="cover" src={image} alt={title} />}
 
       <CardFooter
         justify="space-between"
@@ -72,6 +68,7 @@ function PostCard({ title, excerpt, author }) {
 PostCard.propTypes = {
   title: PropTypes.string.isRequired,
   excerpt: PropTypes.string.isRequired,
+  image: PropTypes.string,
   author: PropTypes.object.isRequired,
 };
 
