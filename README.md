@@ -1,6 +1,6 @@
 # Goiteens Blog Test Project
 
-## 🌍 Api - https://goiteens-blog-api.olehhapuk.com.ua/api
+## 🌍 Api - https://goiteens-blog-api-production.up.railway.app/api
 
 ## 📝 Setup
 

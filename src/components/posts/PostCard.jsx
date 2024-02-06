@@ -15,8 +15,26 @@ import {
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BiLike, BiShare } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { likePostService } from '../../services/postsServices';
 
-function PostCard({ title, excerpt, author, image }) {
+// TODO: Add id, onLike to prop types
+function PostCard({
+  title,
+  excerpt,
+  author,
+  image,
+  id,
+  onLike,
+  isLiked,
+  likesCount,
+}) {
+  function handleLikeClick() {
+    likePostService(id).then((post) => {
+      onLike(post);
+    });
+  }
+
   return (
     <Card>
       <CardHeader pb={0}>
@@ -38,7 +56,7 @@ function PostCard({ title, excerpt, author, image }) {
         </Flex>
       </CardHeader>
       <CardBody>
-        <Heading mb="8px" size="lg">
+        <Heading mb="8px" size="lg" as={Link} to={`/posts/${id}`}>
           {title}
         </Heading>
         <Text>{excerpt}</Text>
@@ -54,8 +72,14 @@ function PostCard({ title, excerpt, author, image }) {
           },
         }}
       >
-        <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
-          Like
+        <Button
+          flex="1"
+          variant="ghost"
+          leftIcon={<BiLike />}
+          onClick={handleLikeClick}
+          colorScheme={isLiked ? 'blue' : 'gray'}
+        >
+          Like ({likesCount})
         </Button>
         <Button flex="1" variant="ghost" leftIcon={<BiShare />}>
           Share

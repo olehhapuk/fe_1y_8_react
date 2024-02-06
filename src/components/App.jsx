@@ -14,6 +14,7 @@ import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import FeedPage from '../pages/posts/FeedPage';
 import CreatePostPage from '../pages/posts/CreatePostPage';
+import PostPage from '../pages/posts/PostPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,14 @@ function App() {
           element={
             <PrivateRoute>
               <CreatePostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/posts/:postId"
+          element={
+            <PrivateRoute>
+              <PostPage />
             </PrivateRoute>
           }
         />

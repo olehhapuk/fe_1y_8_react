@@ -2,7 +2,8 @@ import { Stack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import PostCard from './PostCard';
 
-function PostsList({ posts }) {
+// TODO: Add onLike to prop types
+function PostsList({ posts, onLike }) {
   return (
     <Stack>
       {posts.map((post) => (
@@ -12,6 +13,10 @@ function PostsList({ posts }) {
           excerpt={post.excerpt}
           author={post.author}
           image={post.image}
+          id={post.id}
+          onLike={onLike}
+          isLiked={post.isLiked}
+          likesCount={post._count.likedBy}
         />
       ))}
     </Stack>

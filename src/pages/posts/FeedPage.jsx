@@ -37,6 +37,12 @@ function FeedPage() {
     fetchPosts();
   }, []);
 
+  function likePost(updatedPost) {
+    setPosts((prev) =>
+      prev.map((post) => (post.id === updatedPost.id ? updatedPost : post))
+    );
+  }
+
   return (
     <div>
       <Heading mb="16px">Feed</Heading>
@@ -52,7 +58,7 @@ function FeedPage() {
         next={() => fetchPosts(activePage + 1)}
         hasMore={hasMore}
       >
-        <PostsList posts={posts} />
+        <PostsList posts={posts} onLike={likePost} />
       </InfiniteScroll>
     </div>
   );
