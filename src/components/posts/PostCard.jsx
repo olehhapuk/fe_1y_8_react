@@ -11,12 +11,22 @@ import {
   Image,
   CardFooter,
   Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BiLike, BiShare } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { likePostService } from '../../services/postsServices';
+import {
+  likePostService,
+  deletePostService,
+} from '../../services/postsServices';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/authSelectors';
 
 // TODO: Add id, onLike to prop types
 function PostCard({
@@ -28,10 +38,25 @@ function PostCard({
   onLike,
   isLiked,
   likesCount,
+  onDelete,
 }) {
+  const [isLikeLoading, setIsLikeLoading] = useState(false);
+
+  const user = useSelector(selectUser);
+
   function handleLikeClick() {
-    likePostService(id).then((post) => {
-      onLike(post);
+    setIsLikeLoading(true);
+
+    likePostService(id)
+      .then((post) => {
+        onLike(post);
+      })
+      .finally(() => setIsLikeLoading(false));
+  }
+
+  function handleDeleteClick() {
+    deletePostService(id).then(() => {
+      onDelete(id);
     });
   }
 
@@ -47,12 +72,25 @@ function PostCard({
               <Text>@{author.username}</Text>
             </Box>
           </Flex>
-          <IconButton
-            variant="ghost"
-            colorScheme="gray"
-            aria-label="See menu"
-            icon={<BsThreeDotsVertical />}
-          />
+
+          {author.id === user.id && (
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                variant="ghost"
+                colorScheme="gray"
+                aria-label="See menu"
+                icon={<BsThreeDotsVertical />}
+              />
+
+              <MenuList>
+                <MenuItem>Edit</MenuItem>
+                <MenuItem color="red.400" onClick={handleDeleteClick}>
+                  Delete
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          )}
         </Flex>
       </CardHeader>
       <CardBody>
@@ -78,6 +116,7 @@ function PostCard({
           leftIcon={<BiLike />}
           onClick={handleLikeClick}
           colorScheme={isLiked ? 'blue' : 'gray'}
+          isLoading={isLikeLoading}
         >
           Like ({likesCount})
         </Button>
@@ -94,6 +133,10 @@ PostCard.propTypes = {
   excerpt: PropTypes.string.isRequired,
   image: PropTypes.string,
   author: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  onLike: PropTypes.func.isRequired,
+  isLiked: PropTypes.bool.isRequired,
+  likesCount: PropTypes.number.isRequired,
 };
 
 export default PostCard;

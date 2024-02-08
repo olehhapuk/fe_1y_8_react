@@ -43,6 +43,10 @@ function FeedPage() {
     );
   }
 
+  function deletePost(postId) {
+    setPosts((prev) => prev.filter((post) => post.id !== postId));
+  }
+
   return (
     <div>
       <Heading mb="16px">Feed</Heading>
@@ -58,7 +62,7 @@ function FeedPage() {
         next={() => fetchPosts(activePage + 1)}
         hasMore={hasMore}
       >
-        <PostsList posts={posts} onLike={likePost} />
+        <PostsList posts={posts} onLike={likePost} onDelete={deletePost} />
       </InfiniteScroll>
     </div>
   );

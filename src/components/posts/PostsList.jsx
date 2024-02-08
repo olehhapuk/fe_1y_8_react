@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PostCard from './PostCard';
 
 // TODO: Add onLike to prop types
-function PostsList({ posts, onLike }) {
+function PostsList({ posts, onLike, onDelete }) {
   return (
     <Stack>
       {posts.map((post) => (
@@ -17,6 +17,7 @@ function PostsList({ posts, onLike }) {
           onLike={onLike}
           isLiked={post.isLiked}
           likesCount={post._count.likedBy}
+          onDelete={onDelete}
         />
       ))}
     </Stack>

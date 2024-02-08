@@ -17,3 +17,7 @@ export function getPostDetailsService(postId) {
 export function likePostService(postId) {
   return axios.post(`/posts/${postId}/like`);
 }
+
+export function deletePostService(postId) {
+  return axios.delete(`/posts/${postId}`);
+}
