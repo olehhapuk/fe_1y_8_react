@@ -15,6 +15,7 @@ import RegisterPage from '../pages/auth/RegisterPage';
 import FeedPage from '../pages/posts/FeedPage';
 import CreatePostPage from '../pages/posts/CreatePostPage';
 import PostPage from '../pages/posts/PostPage';
+import EditPostPage from '../pages/posts/EditPostPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,14 @@ function App() {
           element={
             <PrivateRoute>
               <PostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/posts/:postId/edit"
+          element={
+            <PrivateRoute>
+              <EditPostPage />
             </PrivateRoute>
           }
         />

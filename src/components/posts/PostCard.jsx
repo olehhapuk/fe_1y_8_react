@@ -84,7 +84,9 @@ function PostCard({
               />
 
               <MenuList>
-                <MenuItem>Edit</MenuItem>
+                <MenuItem as={Link} to={`/posts/${id}/edit`}>
+                  Edit
+                </MenuItem>
                 <MenuItem color="red.400" onClick={handleDeleteClick}>
                   Delete
                 </MenuItem>
