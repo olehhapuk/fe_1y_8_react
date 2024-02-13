@@ -21,3 +21,7 @@ export function likePostService(postId) {
 export function deletePostService(postId) {
   return axios.delete(`/posts/${postId}`);
 }
+
+export function editPostService(postId, data) {
+  return axios.put(`/posts/${postId}`, data);
+}
