@@ -16,6 +16,7 @@ import FeedPage from '../pages/posts/FeedPage';
 import CreatePostPage from '../pages/posts/CreatePostPage';
 import PostPage from '../pages/posts/PostPage';
 import EditPostPage from '../pages/posts/EditPostPage';
+import UserPage from '../pages/users/UserPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -77,6 +78,14 @@ function App() {
           element={
             <PrivateRoute>
               <EditPostPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users/:userId"
+          element={
+            <PrivateRoute>
+              <UserPage />
             </PrivateRoute>
           }
         />
