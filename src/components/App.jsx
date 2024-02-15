@@ -17,6 +17,7 @@ import CreatePostPage from '../pages/posts/CreatePostPage';
 import PostPage from '../pages/posts/PostPage';
 import EditPostPage from '../pages/posts/EditPostPage';
 import UserPage from '../pages/users/UserPage';
+import TrendingPage from '../pages/posts/TrendingPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,14 @@ function App() {
           element={
             <PrivateRoute>
               <FeedPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/trending"
+          element={
+            <PrivateRoute>
+              <TrendingPage />
             </PrivateRoute>
           }
         />

@@ -6,6 +6,18 @@ export function getAllPostsService(params) {
   });
 }
 
+export function getFeedService(params) {
+  return axios.get('/posts/follows', {
+    params,
+  });
+}
+
+export function getTrendingService(params) {
+  return axios.get('/posts/trending', {
+    params,
+  });
+}
+
 export function createPostService(data) {
   return axios.post('/posts', data);
 }

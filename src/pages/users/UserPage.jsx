@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getUserService } from '../../services/usersServices';
+import { getUserService, followService } from '../../services/usersServices';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/authSelectors';
 
@@ -24,6 +24,10 @@ function UserPage() {
   useEffect(() => {
     getUserService(userId).then((data) => setUser(data));
   }, [userId]);
+
+  function follow() {
+    followService(userId).then((newUser) => setUser(newUser));
+  }
 
   return (
     <div>
@@ -50,7 +54,15 @@ function UserPage() {
             <Button>Following {user._count.following}</Button>
           </ButtonGroup>
 
-          {!isAuthUser && <Button colorScheme="blue">Follow</Button>}
+          {!isAuthUser && (
+            <Button
+              colorScheme="blue"
+              variant={user.isFollowing ? 'outline' : 'solid'}
+              onClick={follow}
+            >
+              {user.isFollowing ? 'Unfollow' : 'Follow'}
+            </Button>
+          )}
         </Stack>
       )}
     </div>

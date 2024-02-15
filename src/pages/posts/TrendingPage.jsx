@@ -1,16 +1,16 @@
-import { getFeedService } from '../../services/postsServices';
+import { getTrendingService } from '../../services/postsServices';
 import PostsList from '../../components/posts/PostsList';
 import { CircularProgress, Heading, Stack } from '@chakra-ui/react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { usePosts } from '../../hooks/usePosts';
 
-function FeedPage() {
+function TrendingPage() {
   const { posts, activePage, hasMore, fetchPosts, likePost, deletePost } =
-    usePosts(getFeedService);
+    usePosts(getTrendingService);
 
   return (
     <div>
-      <Heading mb="16px">Feed</Heading>
+      <Heading mb="16px">Trending</Heading>
 
       <InfiniteScroll
         dataLength={posts.length}
@@ -29,4 +29,4 @@ function FeedPage() {
   );
 }
 
-export default FeedPage;
+export default TrendingPage;
