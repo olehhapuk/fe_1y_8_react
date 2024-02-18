@@ -1,8 +1,8 @@
 import { marked } from 'marked';
 import dompurify from 'dompurify';
 import { Box, useColorMode } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
-// Todo: Write propTypes
 function ParsedMarkdown({ value }) {
   const { colorMode } = useColorMode();
 
@@ -68,5 +68,9 @@ function ParsedMarkdown({ value }) {
     />
   );
 }
+
+ParsedMarkdown.propTypes = {
+  value: PropTypes.string.isRequired,
+};
 
 export default ParsedMarkdown;

@@ -16,7 +16,7 @@ const schema = yup.object().shape({
   body: yup.string().min(3).required(),
 });
 
-function EditPostForm({ post }) {
+function EditPostForm({ post, isLoading }) {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -91,7 +91,7 @@ function EditPostForm({ post }) {
           {...formik.getFieldProps('body')}
         />
 
-        <Button type="submit" colorScheme="blue" isDisabled={!post}>
+        <Button type="submit" colorScheme="blue" isLoading={!isLoading}>
           Edit Post
         </Button>
       </Stack>
@@ -101,6 +101,7 @@ function EditPostForm({ post }) {
 
 EditPostForm.propTypes = {
   post: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default EditPostForm;

@@ -28,7 +28,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/authSelectors';
 
-// TODO: Add id, onLike to prop types
 function PostCard({
   title,
   excerpt,
@@ -141,6 +140,7 @@ PostCard.propTypes = {
   onLike: PropTypes.func.isRequired,
   isLiked: PropTypes.bool.isRequired,
   likesCount: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default PostCard;
