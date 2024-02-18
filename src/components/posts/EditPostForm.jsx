@@ -91,7 +91,7 @@ function EditPostForm({ post, isLoading }) {
           {...formik.getFieldProps('body')}
         />
 
-        <Button type="submit" colorScheme="blue" isLoading={!isLoading}>
+        <Button type="submit" colorScheme="blue" isLoading={isLoading}>
           Edit Post
         </Button>
       </Stack>
