@@ -5,12 +5,18 @@ import {
   Heading,
   Stack,
   Text,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserService, followService } from '../../services/usersServices';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/authSelectors';
+import UserPosts from '../../components/users/UserPosts';
 
 function UserPage() {
   const { userId } = useParams();
@@ -63,6 +69,20 @@ function UserPage() {
               {user.isFollowing ? 'Unfollow' : 'Follow'}
             </Button>
           )}
+
+          <Tabs width="100%" isFitted>
+            <TabList>
+              <Tab>Posts</Tab>
+              <Tab>Likes</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <UserPosts />
+              </TabPanel>
+              <TabPanel>User likes</TabPanel>
+            </TabPanels>
+          </Tabs>
         </Stack>
       )}
     </div>

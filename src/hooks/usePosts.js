@@ -1,7 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-export function usePosts(service) {
+export function usePosts(service, params) {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [activePage, setActivePage] = useState(1);
@@ -12,7 +12,7 @@ export function usePosts(service) {
   function fetchPosts(page = 1) {
     setIsLoading(true);
 
-    service({ perPage: 12, page })
+    service({ perPage: 12, page, ...params })
       .then((data) => {
         setPosts((prev) =>
           data.page > 1 ? [...prev, ...data.items] : data.items
@@ -42,8 +42,7 @@ export function usePosts(service) {
 
   useEffect(() => {
     fetchPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params]);
 
   return {
     posts,
