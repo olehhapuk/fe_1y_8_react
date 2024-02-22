@@ -78,7 +78,7 @@ function UserPage() {
 
             <TabPanels>
               <TabPanel>
-                <UserPosts />
+                <UserPosts userId={userId} />
               </TabPanel>
               <TabPanel>User likes</TabPanel>
             </TabPanels>

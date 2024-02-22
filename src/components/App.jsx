@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
@@ -18,6 +18,7 @@ import PostPage from '../pages/posts/PostPage';
 import EditPostPage from '../pages/posts/EditPostPage';
 import UserPage from '../pages/users/UserPage';
 import TrendingPage from '../pages/posts/TrendingPage';
+import MarketingPage from '../pages/marketing/MarketingPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/feed" />} />
+      <Route path="/" element={<MarketingPage />} />
 
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />

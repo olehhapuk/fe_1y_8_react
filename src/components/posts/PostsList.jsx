@@ -17,6 +17,7 @@ function PostsList({ posts, onLike, onDelete }) {
           isLiked={post.isLiked}
           likesCount={post._count.likedBy}
           onDelete={onDelete}
+          createdAt={post.createdAt}
         />
       ))}
     </Stack>

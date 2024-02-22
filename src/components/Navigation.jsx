@@ -9,12 +9,14 @@ import {
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { RxExit } from 'react-icons/rx';
 import NavigationLink from './NavigationLink';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../redux/auth/authActions';
+import { selectUser } from '../redux/auth/authSelectors';
 
 function Navigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   function logout() {
     dispatch(logoutAction());
@@ -44,6 +46,11 @@ function Navigation() {
       <Stack gap="4px">
         <NavigationLink to="/feed">Feed</NavigationLink>
         <NavigationLink to="/trending">Trending</NavigationLink>
+
+        <NavigationLink to={`/users/${user.id}`}>
+          {user.username}
+        </NavigationLink>
+
         <NavigationLink to="/create-post">+ Create Post</NavigationLink>
       </Stack>
     </>

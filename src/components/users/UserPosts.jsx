@@ -1,14 +1,17 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { CircularProgress, Stack } from '@chakra-ui/react';
+import { useMemo } from 'react';
 import { usePosts } from '../../hooks/usePosts';
 import { getUserPostsService } from '../../services/usersServices';
 import PostsList from '../posts/PostsList';
 
-const params = {
-  userId: 4,
-};
+function UserPosts({ userId }) {
+  const params = useMemo(() => {
+    return {
+      userId,
+    };
+  }, [userId]);
 
-function UserPosts() {
   const { posts, activePage, hasMore, fetchPosts, likePost, deletePost } =
     usePosts(getUserPostsService, params);
 

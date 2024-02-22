@@ -13,3 +13,9 @@ export function getUserPostsService({ userId, ...params }) {
     params,
   });
 }
+
+export function getUserLikesService({ userId, ...params }) {
+  return axios.get(`/users/${userId}/likes`, {
+    params,
+  });
+}
